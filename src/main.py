@@ -1,11 +1,31 @@
 # Resolve the problem!!
 import string
+import numpy as np
 
 SYMBOLS = list('!"#$%&\'()*+,-./:;?@[]^_`{|}~')
 
 
 def generate_password():
-    # Start coding here
+    size=np.random.randint(8, high=17)
+    chars=[]
+
+    a=np.random.choice(4, size-4)
+    b=np.random.choice(4, 4,replace=False)
+    c=np.concatenate((a,b))
+    np.random.shuffle(c)
+
+    for i in range(size):
+        if c[i] == 0:
+            chars.append(SYMBOLS[np.random.randint(0, high=len(SYMBOLS))])
+        elif c[i]==1:
+            chars.append(chr(np.random.randint(65, high=90)))
+        elif c[i]==2:
+            chars.append(chr(np.random.randint(97, high=122)))  
+        elif c[i]==3:
+            chars.append(chr(np.random.randint(48, high=57)))
+
+    password=''.join(chars)
+    return password
 
 
 def validate(password):
